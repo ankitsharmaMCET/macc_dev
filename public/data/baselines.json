@@ -1,0 +1,47 @@
+{
+  "Steel": {
+    "production_label": "tonnes",
+    "annual_production": 120000000,
+    "annual_emissions": 297000000
+  },
+  "Aluminium": {
+    "production_label": "tonnes",
+    "annual_production": 3600000,
+    "annual_emissions": 77000000
+  },
+  "Cement": {
+    "production_label": "tonnes",
+    "annual_production": 337000000,
+    "annual_emissions": 218000000
+  },
+  "Fertiliser": {
+    "production_label": "tonnes",
+    "annual_production": 43000000,
+    "annual_emissions": 25000000
+  },
+  "Textile": {
+    "production_label": "tonnes",
+    "annual_production": 9500000,
+    "annual_emissions": 25000000
+  },
+  "Paper & Pulp": {
+    "production_label": "tonnes",
+    "annual_production": 19300000,
+    "annual_emissions": 30500000
+  },
+  "Petrochemicals": {
+    "production_label": "tonnes",
+    "annual_production": 26500000,
+    "annual_emissions": 94870000
+  },
+  "Refineries": {
+    "production_label": "tonnes",
+    "annual_production": 243000000,
+    "annual_emissions": 70000000
+  },
+  "Chlor Alkali": {
+    "production_label": "tonnes",
+    "annual_production": 4540000,
+    "annual_emissions": 12000000
+  }
+}

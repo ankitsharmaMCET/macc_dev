@@ -1,0 +1,14 @@
+[
+  { "name": "HGV | diesel", "unit": "000 ton-km", "price_per_unit_inr": 2000, "ef_tco2_per_unit": 0.110 },
+  { "name": "HGV | CNG", "unit": "000 ton-km", "price_per_unit_inr": 2200, "ef_tco2_per_unit": 0.080 },
+  { "name": "HGV | electric", "unit": "000 ton-km", "price_per_unit_inr": 2500, "ef_tco2_per_unit": 0.020 },
+
+  { "name": "Rail | diesel", "unit": "000 ton-km", "price_per_unit_inr": 1200, "ef_tco2_per_unit": 0.035 },
+  { "name": "Rail | electric", "unit": "000 ton-km", "price_per_unit_inr": 1000, "ef_tco2_per_unit": 0.015 },
+
+  { "name": "Inland waterway | barge (diesel)", "unit": "000 ton-km", "price_per_unit_inr": 800, "ef_tco2_per_unit": 0.020 },
+  { "name": "Coastal shipping | heavy fuel oil", "unit": "000 ton-km", "price_per_unit_inr": 900, "ef_tco2_per_unit": 0.030 },
+
+  { "name": "Air freight | domestic", "unit": "000 ton-km", "price_per_unit_inr": 15000, "ef_tco2_per_unit": 0.500 },
+  { "name": "Air freight | international", "unit": "000 ton-km", "price_per_unit_inr": 12000, "ef_tco2_per_unit": 0.420 }
+]
