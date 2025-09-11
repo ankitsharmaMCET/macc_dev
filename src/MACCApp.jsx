@@ -880,68 +880,63 @@ function MeasureWizard({ onClose, onSave, sectors, currency, carbonPrice, dataSo
                   })}
                 </div>
 
-                {/* Raw group */}
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-semibold">Raw material lines</div>
-                    <button type="button" className="text-xs px-2 py-1 rounded border" onClick={() => addLine(rawLines, setRawLines, { name: DS_RAW[0]?.name || "", priceOv: null, efOv: null, priceEscPctYr: 0, efEscPctYr: 0, delta: makeZeros() })}>+ Add raw line</button>
-                  </div>
-                  {rawLines.map((ln) => {
-                    const base = DS_RAW.find(x => x.name === ln.name);
-                    const unit = base?.unit || "-";
-                    return (
-                      <div key={ln.id} className="mt-2 rounded-lg border p-2 bg-white">
-                        <LineHeader title="Raw material line" onRemove={() => removeLine(rawLines, setRawLines, ln.id)} />
-                        <div className="grid grid-cols-2 gap-2 mt-2">
-                          <label className="text-sm col-span-2">Raw material
-                            <select className="mt-1 border rounded-xl px-3 py-2 w-full" value={ln.name} onChange={e => updateLine(rawLines, setRawLines, ln.id, { name: e.target.value })}>
-                              {DS_RAW.map(x => <option key={x.name}>{x.name}</option>)}
-                            </select>
-                          </label>
-                          <label className="text-sm">Price override (₹/{unit})
-                          <input
-                              type="number"
-                              className="mt-1 border rounded-xl px-3 py-2 w-full"
-                              placeholder={(getUnitPrice(base)).toString()}
-                              title="Leave blank to use the catalog price for this item. If filled, this replaces the catalog price in the base year; annual Price drift then applies on top."
-                              value={ln.priceOv ?? ""}
-                              onChange={e => updateLine(fuelLines, setFuelLines, ln.id, { priceOv: e.target.value === "" ? null : Number(e.target.value) })}
-                            />
-                            <div className="text-[11px] text-gray-500 mt-0.5">
-                              Blank = use catalog price. Drift (%/yr) compounds from the base year (e.g., 2030 uses {BASE_YEAR}×(1+drift)^(2030−{BASE_YEAR})).
-                            </div>                          
-                            </label>
-                          <label className="text-sm">EF override (tCO₂/{unit})
-                            <input
-                                type="number"
-                                className="mt-1 border rounded-xl px-3 py-2 w-full"
-                                placeholder={(getEFperUnit(base)).toString()}
-                                title="Leave blank to use the catalog emission factor (EF). If filled, this replaces EF in the base year; EF drift then applies on top."
-                                value={ln.efOv ?? ""}
-                                onChange={e => updateLine(fuelLines, setFuelLines, ln.id, { efOv: e.target.value === "" ? null : Number(e.target.value) })}
-                              />
-                              <div className="text-[11px] text-gray-500 mt-0.5">
-                                Blank = use catalog EF. EF drift (%/yr) compounds from the base year.
-                              </div>                          
-                          </label>
-                          <label className="text-sm">Price drift (%/yr)
-                            <input type="number" className="mt-1 border rounded-xl px-3 py-2 w-full" value={ln.priceEscPctYr} onChange={e => updateLine(rawLines, setRawLines, ln.id, { priceEscPctYr: Number(e.target.value) })} />
-                          </label>
-                          <label className="text-sm">EF drift (%/yr)
-                            <input type="number" className="mt-1 border rounded-xl px-3 py-2 w-full" value={ln.efEscPctYr} onChange={e => updateLine(rawLines, setRawLines, ln.id, { efEscPctYr: Number(e.target.value) })} />
-                          </label>
-                        </div>
-                        <SeriesRow
-                          label={`ΔRaw quantity (${unit})`}
-                          unit={unit}
-                          series={ln.delta}
-                          onChange={(i, v) => updateLine(rawLines, setRawLines, ln.id, { delta: ln.delta.map((vv, idx) => idx === i ? (v === "" ? "" : Number(v)) : vv) })}
-                          onInterpolate={() => updateLine(rawLines, setRawLines, ln.id, { delta: interpolateSeries(ln.delta) })}
+ {/* Raw group */}
+            <div className="bg-gray-50 p-4 rounded-xl">
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-sm font-semibold">Raw material lines</div>
+                <button type="button" className="text-xs px-2 py-1 rounded-full border border-gray-300 text-gray-600 hover:bg-gray-100 transition-colors" onClick={() => addLine(rawLines, setRawLines, { name: DS_RAW[0]?.name || "", priceOv: null, efOv: null, priceEscPctYr: 0, efEscPctYr: 0, delta: makeZeros() })}>+ Add raw line</button>
+              </div>
+              {rawLines.map((ln) => {
+                const base = DS_RAW.find(x => x.name === ln.name);
+                const unit = base?.unit || "-";
+                return (
+                  <div key={ln.id} className="mt-2 rounded-lg border p-2 bg-white">
+                    <LineHeader title="Raw material line" onRemove={() => removeLine(rawLines, setRawLines, ln.id)} />
+                    <div className="grid grid-cols-2 gap-2 mt-2">
+                      <label className="text-sm col-span-2">Raw material
+                        <select className="mt-1 border rounded-xl px-3 py-2 w-full" value={ln.name} onChange={e => updateLine(rawLines, setRawLines, ln.id, { name: e.target.value })}>
+                          {DS_RAW.map(x => <option key={x.name}>{x.name}</option>)}
+                        </select>
+                      </label>
+                      <label className="text-sm">Price override (₹/{unit})
+                        <input
+                          type="number"
+                          className="mt-1 border rounded-xl px-3 py-2 w-full"
+                          placeholder={(getUnitPrice(base)).toString()}
+                          title="Leave blank to use the catalog price for this item. If filled, this replaces the catalog price in the base year; annual Price drift then applies on top."
+                          value={ln.priceOv ?? ""}
+                          onChange={e => updateLine(rawLines, setRawLines, ln.id, { priceOv: e.target.value === "" ? null : Number(e.target.value) })}
                         />
-                      </div>
-                    );
-                  })}
-                </div>
+                      </label>
+                      <label className="text-sm">EF override (tCO₂/{unit})
+                        <input
+                          type="number"
+                          className="mt-1 border rounded-xl px-3 py-2 w-full"
+                          placeholder={(getEFperUnit(base)).toString()}
+                          title="Leave blank to use the catalog emission factor (EF). If filled, this replaces EF in the base year; EF drift then applies on top."
+                          value={ln.efOv ?? ""}
+                          onChange={e => updateLine(rawLines, setRawLines, ln.id, { efOv: e.target.value === "" ? null : Number(e.target.value) })}
+                        />
+                      </label>
+                      <label className="text-sm">Price drift (%/yr)
+                        <input type="number" className="mt-1 border rounded-xl px-3 py-2 w-full" value={ln.priceEscPctYr} onChange={e => updateLine(rawLines, setRawLines, ln.id, { priceEscPctYr: Number(e.target.value) })} />
+                      </label>
+                      <label className="text-sm">EF drift (%/yr)
+                        <input type="number" className="mt-1 border rounded-xl px-3 py-2 w-full" value={ln.efEscPctYr} onChange={e => updateLine(rawLines, setRawLines, ln.id, { efEscPctYr: Number(e.target.value) })} />
+                      </label>
+                    </div>
+                    <SeriesRow
+                      label={`ΔRaw quantity (${unit})`}
+                      unit={unit}
+                      series={ln.delta}
+                      onChange={(i, v) => updateLine(rawLines, setRawLines, ln.id, { delta: ln.delta.map((vv, idx) => idx === i ? (v === "" ? "" : Number(v)) : vv) })}
+                      onInterpolate={() => updateLine(rawLines, setRawLines, ln.id, { delta: interpolateSeries(ln.delta) })}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
 
                 {/* Transport group */}
                 <div>
