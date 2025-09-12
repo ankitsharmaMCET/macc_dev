@@ -1206,7 +1206,7 @@ function MeasureWizard({ onClose, onSave, sectors, currency, carbonPrice, dataSo
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm bg-gray-50 rounded-xl p-3 border">
+                {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm bg-gray-50 rounded-xl p-3 border">
                   <div>
                     <div className="text-gray-500">NPV (without carbon price)</div>
                     <div className="font-semibold">{currency} {formatNumber(computed.finance.npvWO / 10_000_000)} cr</div>
@@ -1230,7 +1230,7 @@ function MeasureWizard({ onClose, onSave, sectors, currency, carbonPrice, dataSo
                       with CP: {currency} {formatNumber(computed.finance.avgCostW)} / tCO₂e
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           )}
