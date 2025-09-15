@@ -783,7 +783,7 @@ function MeasureWizard({ onClose, onSave, sectors, currency, carbonPrice, dataSo
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex gap-2">
             <button className={`px-3 py-1.5 rounded-xl border ${tab === 'quick' ? 'bg-black text-white' : ''}`} onClick={() => setTab('quick')}>Quick</button>
-            <button className={`px-3 py-1.5 rounded-xl border ${tab === 'template' ? 'bg-black text-white' : ''}`} onClick={() => setTab('template')} id="measure-wizard-title">Template (catalog-aware)</button>
+            <button className={`px-3 py-1.5 rounded-xl border ${tab === 'template' ? 'bg-black text-white' : ''}`} onClick={() => setTab('template')} id="measure-wizard-title">Template (catalog)</button>
           </div>
           <button className="px-3 py-1.5 rounded-xl border" onClick={onClose}>Close</button>
         </div>
