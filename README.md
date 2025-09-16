@@ -20,7 +20,6 @@ A React app for building **Marginal Abatement Cost Curves (MACCs)** for firms in
 - [Methodology (Formulas)](#methodology-formulas)  
 - [Key UI Components](#key-ui-components)  
 - [Persistence & Import/Export](#persistence--importexport)  
-- [Known Limitations & Options](#known-limitations--options)  
 - [Troubleshooting](#troubleshooting)  
 - [Tech Stack & Scripts](#tech-stack--scripts)  
 - [Folder Structure](#folder-structure)  
@@ -283,22 +282,6 @@ macc_firm_{id}_catalog_mode
 
 **Export Firm (.json)**: bundles the above into a single file.  
 **Import Firm (.json)**: replaces the active firm’s data.
-
----
-
-## Known Limitations & Options
-
-- **Upfront Capex in Per‑Ton Cost**  
-  In the default code, `capex_upfront_cr` **does not** enter the per‑ton numerator (it only affects cashflows for NPV/IRR).  
-  - If you want capital reflected in ₹/tCO₂, either:
-    1) Put capex into `capex_financed_cr` (preferred), or  
-    2) Annualize `capex_upfront_cr` using the discount rate and add it to `net_cost_cr`.
-- **Intensity Mode**  
-  X‑axis shows **% of baseline emissions reduced**. It is not per‑unit intensity unless production is constant. The baseline intensity shown in UI is informational.
-- **Five‑Year Interpolation**  
-  Interpolation fills gaps linearly between nearest filled points; it does not extrapolate beyond bounds.
-- **Currency**  
-  UI is locked to **₹**. Internally, many stack inputs are **₹ cr**; the code converts to ₹ using `× 10_000_000`.
 
 ---
 
