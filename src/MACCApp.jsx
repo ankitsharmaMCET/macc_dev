@@ -594,7 +594,19 @@ function MeasureWizard({ onClose, onSave, sectors, currency, carbonPrice, dataSo
         ? capex_financed_cr * annuityFactor(i_nominal, n_tenure)
         : 0;
 
-      const net_cost_cr = (driver_cr + opex_cr + other_cr - savings_cr) + financedAnnual_cr;
+
+      // Equivalent annual cost for the upfront capex (use real discount rate & project life)
+      const r_real = Number(meta.discount_rate || 0.10);
+      const life   = Math.max(1, Number(meta.project_life_years || 1));
+      const capexUpfrontAnnual_cr =
+        (capex_upfront_cr > 0) ? capex_upfront_cr * annuityFactor(r_real, life) : 0;
+
+    //-  const net_cost_cr = (driver_cr + opex_cr + other_cr - savings_cr) + financedAnnual_cr;
+      const net_cost_cr =
+        (driver_cr + opex_cr + other_cr - savings_cr) + financedAnnual_cr + capexUpfrontAnnual_cr;
+
+
+      //const net_cost_cr = (driver_cr + opex_cr + other_cr - savings_cr) + financedAnnual_cr;
 
       // Cash flows in ₹ — add CP benefit only on reduced tons
       const cashflow_inr_wo_cp = (savings_cr - opex_cr - driver_cr - other_cr - financedAnnual_cr - capex_upfront_cr) * 10_000_000;
@@ -783,7 +795,7 @@ function MeasureWizard({ onClose, onSave, sectors, currency, carbonPrice, dataSo
         <div className="flex items-center justify-between p-4 border-b">
           <div className="flex gap-2">
             <button className={`px-3 py-1.5 rounded-xl border ${tab === 'quick' ? 'bg-black text-white' : ''}`} onClick={() => setTab('quick')}>Quick</button>
-            <button className={`px-3 py-1.5 rounded-xl border ${tab === 'template' ? 'bg-black text-white' : ''}`} onClick={() => setTab('template')} id="measure-wizard-title">Template (catalog-aware)</button>
+            <button className={`px-3 py-1.5 rounded-xl border ${tab === 'template' ? 'bg-black text-white' : ''}`} onClick={() => setTab('template')} id="measure-wizard-title">Template (catalog)</button>
           </div>
           <button className="px-3 py-1.5 rounded-xl border" onClick={onClose}>Close</button>
         </div>
